@@ -8,10 +8,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define LLBOMTOMCOMPASSMENU_VIEW_HEIGHT 135.0
+#define LLBOMTOMCOMPASSMENU_VIEW_HEIGHT 148.0
 #define LLBOMTOMCOMPASSMENU_VIEW_WIDTH  296.0
 
 typedef enum {
+    kLLBomtomCompassMenuNULL = 0,
     kLLBomtomCompassMenuCenterBtnTag = 100,
     kLLBomtomCompassMenuInnerBtnTag_1 = 1,
     kLLBomtomCompassMenuInnerBtnTag_2 = 2,
@@ -42,14 +43,16 @@ typedef enum {
 - (void)LLBomtomCompassMenuDidHideRotationAnimation:(LLBomtomCompassMenu *)menu;
 @end
 
-
 @interface LLBomtomCompassMenu : UIView
 {
-    UIImageView *_rotationView;
+    UIView *_rotationView;
     UIImageView *_innerView;
     BOOL _isRotationViewShow;//NO 为不显示状态 
     BOOL _isMenuShow;
     id<LLBomtomCompassMenuDelegate> delegate;
+    NSMutableDictionary *_outterImgsForInnerMenuItems;
+    NSMutableDictionary *_outterHighlightedImgsForInnerMenuItems;
+    LLBomtomCompassMenuButtonTag _currentSelectedMenuTag;
 }
 
 @property (nonatomic, retain)  id<LLBomtomCompassMenuDelegate> delegate;
@@ -57,11 +60,15 @@ typedef enum {
 - (BOOL)isMenuShow;
 - (void)showOrHideMenu;
 - (void)addButtonToCenterWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage;
+
 - (void)addButtonsToFirstRoundWithImages:(NSArray *)images 
                        highlightedImages:(NSArray *)highlightedImages;
 - (void)addButtonsToFirstRoundWithImages:(NSArray *)images;
-- (void)addButtonsToSecondRoundWithImages:(NSArray *)images highlightedImages:(NSArray *)highlightedImages;
-- (void)addButtonsToSecondRoundWithImages:(NSArray *)images;
+- (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
+                        highlightedImages:(NSArray *)highlightedImages 
+             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag;
+- (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
+             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag;
 
 @end
 

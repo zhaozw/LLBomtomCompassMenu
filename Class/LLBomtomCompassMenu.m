@@ -9,8 +9,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define DEGREES_TO_RADIANS(d) (d * M_PI / 180)
-#define VIEW_HEIGHT 148.0
-#define VIEW_WEIGHT 296.0
+#define VIEW_HEIGHT LLBOMTOMCOMPASSMENU_VIEW_HEIGHT
+#define VIEW_WEIGHT LLBOMTOMCOMPASSMENU_VIEW_WIDTH
 
 
 @implementation LLBomtomCompassMenu
@@ -29,6 +29,9 @@
     {
         _isRotationViewShow = YES;
         _isMenuShow = YES;
+        _outterImgsForInnerMenuItems = [[NSMutableDictionary alloc] init];
+        _outterHighlightedImgsForInnerMenuItems = [[NSMutableDictionary alloc] init];
+        _currentSelectedMenuTag = kLLBomtomCompassMenuNULL;
         [self initView];
     }
     return self;
@@ -38,6 +41,8 @@
 {
     [_innerView release];
     [_rotationView release];
+    [_outterImgsForInnerMenuItems release];
+    [_outterHighlightedImgsForInnerMenuItems release];
     [super dealloc];
 }
 
@@ -90,6 +95,11 @@
         [btn addTarget:self action:@selector(menuButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         if ([[images objectAtIndex:i] isKindOfClass:[UIImage class]]) {
+            
+            if (_currentSelectedMenuTag == kLLBomtomCompassMenuNULL) {
+                _currentSelectedMenuTag = kLLBomtomCompassMenuInnerBtnTag_1;
+            }
+            
             [btn setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
             [_innerView addSubview:btn];
             if (highlightedImages && [[highlightedImages objectAtIndex:i] isKindOfClass:[UIImage class]]) {
@@ -104,40 +114,32 @@
     [self addButtonsToFirstRoundWithImages:images highlightedImages:nil];
 }
 
-- (void)addButtonsToSecondRoundWithImages:(NSArray *)images highlightedImages:(NSArray *)highlightedImages
+- (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
+                        highlightedImages:(NSArray *)highlightedImages 
+             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag
 {
-    CGRect rects[7];
-    rects[0] = CGRectMake(14, 99,  25, 25);
-    rects[1] = CGRectMake(39, 55,  25, 25);
-    rects[2] = CGRectMake(80, 24,  25, 25);
-    rects[3] = CGRectMake(136, 11, 25, 25);
-    rects[4] = CGRectMake(191, 24, 25, 25);
-    rects[5] = CGRectMake(231, 55, 25, 25);
-    rects[6] = CGRectMake(254, 99, 25, 25);
 
-    for (NSInteger i = 0; i < [images count] && i < 7; i ++) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = rects[i];
-        [btn setShowsTouchWhenHighlighted:YES];
-        btn.tag = kLLBomtomCompassMenuOutterBtnTag_1 + i;
-        [btn addTarget:self 
-                action:@selector(menuButtonClicked:) 
-      forControlEvents:UIControlEventTouchUpInside];
-        
-        if ([[images objectAtIndex:i] isKindOfClass:[UIImage class]]) {
-            [btn setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
-            [_rotationView addSubview:btn];
-            
-            if (highlightedImages && [[highlightedImages objectAtIndex:i] isKindOfClass:[UIImage class]]) {
-                [btn setImage:[highlightedImages objectAtIndex:i] forState:UIControlStateHighlighted];
-            }
-        }
+    if (tag < kLLBomtomCompassMenuInnerBtnTag_1 || tag > kLLBomtomCompassMenuInnerBtnTag_5) {
+        return;
     }
+    
+    NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:tag]];
+    
+    if (images) {
+        [_outterImgsForInnerMenuItems setObject:images forKey:key];
+    }
+    
+    if (highlightedImages) {
+        [_outterHighlightedImgsForInnerMenuItems setObject:highlightedImages forKey:key];
+    }
+    
+    [self setButtonsOnOutterRound];
 }
 
 - (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
+             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag
 {
-    [self addButtonsToSecondRoundWithImages:images highlightedImages:nil];
+    [self addButtonsToSecondRoundWithImages:images highlightedImages:nil bindingToFirstRoundItemByTag:tag];
 }
 
 - (void)addButtonToCenterWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage
@@ -159,15 +161,67 @@
     }    
 }
 
+- (void)setButtonsOnOutterRound
+{
+    
+    if (_currentSelectedMenuTag == kLLBomtomCompassMenuNULL) 
+        return;
+    
+    CGRect rects[7];
+    rects[0] = CGRectMake(14, 99,  25, 25);
+    rects[1] = CGRectMake(39, 55,  25, 25);
+    rects[2] = CGRectMake(80, 24,  25, 25);
+    rects[3] = CGRectMake(136, 11, 25, 25);
+    rects[4] = CGRectMake(191, 24, 25, 25);
+    rects[5] = CGRectMake(231, 55, 25, 25);
+    rects[6] = CGRectMake(254, 99, 25, 25);
+    
+    /* clean the old buttons */
+    for (UIView *view in [_rotationView subviews]) {
+        if (view.tag >= kLLBomtomCompassMenuOutterBtnTag_1 &&
+            view.tag <= kLLBomtomCompassMenuOutterBtnTag_7) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:_currentSelectedMenuTag]];
+    NSArray *images = [_outterImgsForInnerMenuItems objectForKey:key];
+    NSArray *highlightedImages = [_outterHighlightedImgsForInnerMenuItems objectForKey:key];
+    
+    for (NSInteger i = 0; i < [images count] && i < 7; i ++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = rects[i];
+        [btn setShowsTouchWhenHighlighted:YES];
+        btn.tag = kLLBomtomCompassMenuOutterBtnTag_1 + i;
+        [btn addTarget:self 
+                action:@selector(menuButtonClicked:) 
+      forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([[images objectAtIndex:i] isKindOfClass:[UIImage class]]) {
+            [btn setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
+            [_rotationView addSubview:btn];
+            
+            if (highlightedImages && [[highlightedImages objectAtIndex:i] isKindOfClass:[UIImage class]]) {
+                [btn setImage:[highlightedImages objectAtIndex:i] forState:UIControlStateHighlighted];
+            }
+        }
+    }
+}
+
 - (void)menuButtonClicked:(id)sender
 {
     UIButton *button = (UIButton *)sender;
+    
+    /* update the buttons in outter round */
+    _currentSelectedMenuTag = button.tag;
+    [self setButtonsOnOutterRound];
+    
     /* when the center button clicked */
-    if (button.tag == kLLBomtomCompassMenuCenterBtnTag) {
+    if (button.tag != kLLBomtomCompassMenuCenterBtnTag) {
         button.userInteractionEnabled = NO;
         [self rotationAnimation];
-    } 
-
+    }
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(dd)]) {
         [self.delegate LLBomtomCompassMenu:self buttonClickedWithTag:button.tag];
     }
