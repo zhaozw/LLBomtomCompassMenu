@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:youku.xcodeproj">
+      location = "self:LLBomtomCompassMenu.xcodeproj">
    </FileRef>
 </Workspace>

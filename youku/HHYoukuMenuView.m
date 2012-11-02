@@ -15,6 +15,20 @@
 @synthesize rotationView,arrayButtonIcon,bgView;
 
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) 
+    {
+        rotationViewIsNomal = NO;
+        isMenuHide = NO;
+        arrayButtonIcon = [[NSMutableArray alloc]init];
+        [self setButtonsFrame];
+        [self initView];
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [bgView release];
@@ -93,23 +107,28 @@
 
 - (void)initView
 {
+    // The inner image view
     bgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"menu1.png"]];
     bgView.frame = CGRectMake(53.0,49.0,191.0, 86.0);
     [self addSubview:bgView];
     [bgView release];
     
+    // The top large image view
     rotationView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"menu2.png"]];
-    rotationView.frame = CGRectMake(0.0, 0.0+ 148.0/2.0,296, 148);
+    rotationView.frame = CGRectMake(0.0, 0.0 +148.0/2.0, 296, 148);
     rotationView.userInteractionEnabled = YES;
-    rotationView.layer.anchorPoint = CGPointMake(0.5,1.0);
+    rotationView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    
+    
     if (rotationViewIsNomal)
     {
         rotationView.layer.transform = CATransform3DIdentity;
     }
     else
     {
-        rotationView.layer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(180),0.0, 0.0, 1.0);;
+        rotationView.layer.transform = CATransform3DIdentity;//CATransform3DMakeRotation(DEGREES_TO_RADIANS(180),0.0, 0.0, 1.0);;
     }
+     
     [self addSubview:rotationView];
     [rotationView release];
     
@@ -127,7 +146,9 @@
         {
             [button setImage:[UIImage imageNamed:[dic objectForKey:@"high"]] forState:UIControlStateHighlighted];
         }
-        [button addTarget:self action:@selector(meunButtonDown:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(meunButtonDown:) 
+         forControlEvents:UIControlEventTouchUpInside];
+        
         button.tag = i;
         button.showsTouchWhenHighlighted = YES;
         [rotationView  addSubview:button];
@@ -150,7 +171,7 @@
         [button addTarget:self action:@selector(meunButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = i;
         button.showsTouchWhenHighlighted = YES;
-        [self  addSubview:button];
+        [self addSubview:button];
     }
 }
 
@@ -184,19 +205,6 @@
     
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) 
-    {
-        rotationViewIsNomal = NO;
-        isMenuHide = NO;
-        arrayButtonIcon = [[NSMutableArray alloc]init];
-        [self setButtonsFrame];
-        [self initView];
-    }
-    return self;
-}
 
 - (void)showOrHideMenu
 {

@@ -16,7 +16,7 @@
                BlueprintIdentifier = "53106C8E150C50B000F45EEF"
                BuildableName = "youku.app"
                BlueprintName = "youku"
-               ReferencedContainer = "container:youku.xcodeproj">
+               ReferencedContainer = "container:LLBomtomCompassMenu.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,7 +34,7 @@
             BlueprintIdentifier = "53106C8E150C50B000F45EEF"
             BuildableName = "youku.app"
             BlueprintName = "youku"
-            ReferencedContainer = "container:youku.xcodeproj">
+            ReferencedContainer = "container:LLBomtomCompassMenu.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,7 +53,7 @@
             BlueprintIdentifier = "53106C8E150C50B000F45EEF"
             BuildableName = "youku.app"
             BlueprintName = "youku"
-            ReferencedContainer = "container:youku.xcodeproj">
+            ReferencedContainer = "container:LLBomtomCompassMenu.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,7 +71,7 @@
             BlueprintIdentifier = "53106C8E150C50B000F45EEF"
             BuildableName = "youku.app"
             BlueprintName = "youku"
-            ReferencedContainer = "container:youku.xcodeproj">
+            ReferencedContainer = "container:LLBomtomCompassMenu.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
