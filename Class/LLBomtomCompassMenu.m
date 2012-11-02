@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define DEGREES_TO_RADIANS(d) (d * M_PI / 180)
-#define VIEW_HEIGHT 135.0
+#define VIEW_HEIGHT 148.0
 #define VIEW_WEIGHT 296.0
 
 
@@ -43,26 +43,28 @@
 
 - (void)initView
 {
-
     // The top large image view
-    _rotationView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_large"]];
-    _rotationView.frame = CGRectMake(0.0, VIEW_HEIGHT/2.0, VIEW_WEIGHT, VIEW_HEIGHT);   
-    _rotationView.userInteractionEnabled = YES;
+    UIImageView *rotationImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_large"]];
+    rotationImageView.frame = CGRectMake(0.0, 0.0, VIEW_WEIGHT, 135);   
+    rotationImageView.userInteractionEnabled = YES;
+    [rotationImageView setUserInteractionEnabled:YES];
+    
+    _rotationView = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_HEIGHT/2.0, VIEW_WEIGHT, VIEW_HEIGHT)];
+    [_rotationView addSubview:rotationImageView];
     _rotationView.layer.anchorPoint = CGPointMake(0.5, 1.0);
-    [_rotationView setUserInteractionEnabled:YES];
     [self addSubview:_rotationView];
+    [_rotationView release];
     
     // The inner image view
     _innerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"menu_inner"]];
     _innerView.frame = CGRectMake(53.0, 49.0, 191.0, 86.0);
     [_innerView setUserInteractionEnabled:YES];
     [self addSubview:_innerView];
-    
 }
 
 - (CGRect)getShowFrame
 {
-    return CGRectMake( (320.0 - VIEW_WEIGHT)/2.0, 460.0 - VIEW_HEIGHT + 14, VIEW_WEIGHT, VIEW_HEIGHT);
+    return CGRectMake( (320.0 - VIEW_WEIGHT)/2.0, 460.0 - VIEW_HEIGHT, VIEW_WEIGHT, VIEW_HEIGHT);
 }
 
 - (CGRect)getHideFrame
@@ -163,20 +165,8 @@
     /* when the center button clicked */
     if (button.tag == kLLBomtomCompassMenuCenterBtnTag) {
         button.userInteractionEnabled = NO;
-        [UIView beginAnimations:@"present-countdown" context:nil];
-        [UIView setAnimationDuration:1];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDidStopSelector:@selector(rotationAnimationDidStop)];
-
-        CGFloat angle = _isRotationViewShow ? 180.0 : 0.0;
-        _rotationView.layer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(angle), 
-                                                                 0.0, 0.0, 1.0);
-        
-        [self rotationAnimationWillStart];
-        [UIView commitAnimations];
+        [self rotationAnimation];
     } 
-
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(dd)]) {
         [self.delegate LLBomtomCompassMenu:self buttonClickedWithTag:button.tag];
@@ -185,6 +175,24 @@
     NSLog(@"menu tag %d clicked", button.tag);
 }
 
+/* start the outter round rotation */
+- (void)rotationAnimation
+{
+    [UIView beginAnimations:@"present-countdown" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDidStopSelector:@selector(rotationAnimationDidStop)];
+    
+    CGFloat angle = _isRotationViewShow ? 180.0 : 0.0;
+    _rotationView.layer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(angle), 
+                                                              0.0, 0.0, 1.0);
+    
+    [self rotationAnimationWillStart];
+    [UIView commitAnimations];
+}
+
+/* When the rotation start, notify the delegate using this method */
 - (void)rotationAnimationWillStart
 {
     if (_isRotationViewShow && 
@@ -201,6 +209,7 @@
     }
 }
 
+/* When the rotation end, notify the delegate using this method */
 - (void)rotationAnimationDidStop
 {
     UIButton *menuButton =  (UIButton *)[self viewWithTag:kLLBomtomCompassMenuCenterBtnTag];
@@ -223,6 +232,7 @@
     _isRotationViewShow = !_isRotationViewShow;
 }
 
+/* show or hide the menu in up and down direction */
 - (void)showOrHideMenu
 {
     [UIView beginAnimations:@"present-countdown" context:nil];
@@ -243,6 +253,7 @@
     [UIView commitAnimations];
 }
 
+/* notify the delegate when the show/hide annimation will be start */
 - (void)showOrHideMenuAnimationWillStart
 {
     if (_isMenuShow && 
@@ -258,9 +269,9 @@
     }
 }
 
+/* notify the delegate when the show/hide annimation will be ended */
 - (void)showOrHideMenuAnimationDidStop
-{
-    
+{    
     if (_isMenuShow && 
         self.delegate && 
         [self.delegate respondsToSelector:@selector(LLBomtomCompassMenuDidHide:)]) {   
