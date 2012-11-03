@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>youku.xcscheme</key>
+		<key>LLBomtomCompassMenu.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>53106C8E150C50B000F45EEF</key>
+		<key>C11D74431644C56E00898942</key>
 		<dict>
 			<key>primary</key>
 			<true/>

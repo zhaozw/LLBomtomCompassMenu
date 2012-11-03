@@ -1,0 +1,263 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C11D74491644C56E00898942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11D74481644C56E00898942 /* UIKit.framework */; };
+		C11D744B1644C56E00898942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11D744A1644C56E00898942 /* Foundation.framework */; };
+		C11D744D1644C56E00898942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11D744C1644C56E00898942 /* CoreGraphics.framework */; };
+		C11D74531644C56E00898942 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C11D74511644C56E00898942 /* InfoPlist.strings */; };
+		C11D74551644C56E00898942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C11D74541644C56E00898942 /* main.m */; };
+		C11D74591644C56E00898942 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C11D74581644C56E00898942 /* LLAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C11D74441644C56E00898942 /* LLBomtomCompassMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLBomtomCompassMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C11D74481644C56E00898942 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C11D744A1644C56E00898942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C11D744C1644C56E00898942 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C11D74501644C56E00898942 /* LLBomtomCompassMenu-Info.plist */ = {isa = PBXFileReference; path = "LLBomtomCompassMenu-Info.plist"; sourceTree = "<group>"; };
+		C11D74521644C56E00898942 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C11D74541644C56E00898942 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C11D74561644C56E00898942 /* LLBomtomCompassMenu-Prefix.pch */ = {isa = PBXFileReference; path = "LLBomtomCompassMenu-Prefix.pch"; sourceTree = "<group>"; };
+		C11D74571644C56E00898942 /* LLAppDelegate.h */ = {isa = PBXFileReference; path = LLAppDelegate.h; sourceTree = "<group>"; };
+		C11D74581644C56E00898942 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C11D74411644C56E00898942 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C11D74491644C56E00898942 /* UIKit.framework in Frameworks */,
+				C11D744B1644C56E00898942 /* Foundation.framework in Frameworks */,
+				C11D744D1644C56E00898942 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C11D74391644C56E00898942 = {
+			isa = PBXGroup;
+			children = (
+				C11D744E1644C56E00898942 /* LLBomtomCompassMenu */,
+				C11D74471644C56E00898942 /* Frameworks */,
+				C11D74451644C56E00898942 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C11D74451644C56E00898942 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C11D74441644C56E00898942 /* LLBomtomCompassMenu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C11D74471644C56E00898942 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C11D74481644C56E00898942 /* UIKit.framework */,
+				C11D744A1644C56E00898942 /* Foundation.framework */,
+				C11D744C1644C56E00898942 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C11D744E1644C56E00898942 /* LLBomtomCompassMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C11D74571644C56E00898942 /* LLAppDelegate.h */,
+				C11D74581644C56E00898942 /* LLAppDelegate.m */,
+				C11D744F1644C56E00898942 /* Supporting Files */,
+			);
+			path = LLBomtomCompassMenu;
+			sourceTree = "<group>";
+		};
+		C11D744F1644C56E00898942 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C11D74501644C56E00898942 /* LLBomtomCompassMenu-Info.plist */,
+				C11D74511644C56E00898942 /* InfoPlist.strings */,
+				C11D74541644C56E00898942 /* main.m */,
+				C11D74561644C56E00898942 /* LLBomtomCompassMenu-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C11D74431644C56E00898942 /* LLBomtomCompassMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C11D745C1644C56E00898942 /* Build configuration list for PBXNativeTarget "LLBomtomCompassMenu" */;
+			buildPhases = (
+				C11D74401644C56E00898942 /* Sources */,
+				C11D74411644C56E00898942 /* Frameworks */,
+				C11D74421644C56E00898942 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LLBomtomCompassMenu;
+			productName = LLBomtomCompassMenu;
+			productReference = C11D74441644C56E00898942 /* LLBomtomCompassMenu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C11D743B1644C56E00898942 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LL;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = GUET/Wondershare;
+			};
+			buildConfigurationList = C11D743E1644C56E00898942 /* Build configuration list for PBXProject "LLBomtomCompassMenu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C11D74391644C56E00898942;
+			productRefGroup = C11D74451644C56E00898942 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C11D74431644C56E00898942 /* LLBomtomCompassMenu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C11D74421644C56E00898942 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C11D74531644C56E00898942 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C11D74401644C56E00898942 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C11D74551644C56E00898942 /* main.m in Sources */,
+				C11D74591644C56E00898942 /* LLAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C11D74511644C56E00898942 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C11D74521644C56E00898942 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C11D745A1644C56E00898942 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C11D745B1644C56E00898942 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C11D745D1644C56E00898942 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LLBomtomCompassMenu/LLBomtomCompassMenu-Prefix.pch";
+				INFOPLIST_FILE = "LLBomtomCompassMenu/LLBomtomCompassMenu-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C11D745E1644C56E00898942 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LLBomtomCompassMenu/LLBomtomCompassMenu-Prefix.pch";
+				INFOPLIST_FILE = "LLBomtomCompassMenu/LLBomtomCompassMenu-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C11D743E1644C56E00898942 /* Build configuration list for PBXProject "LLBomtomCompassMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C11D745A1644C56E00898942 /* Debug */,
+				C11D745B1644C56E00898942 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C11D745C1644C56E00898942 /* Build configuration list for PBXNativeTarget "LLBomtomCompassMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C11D745D1644C56E00898942 /* Debug */,
+				C11D745E1644C56E00898942 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C11D743B1644C56E00898942 /* Project object */;
+}
