@@ -32,7 +32,9 @@ typedef enum {
 @protocol LLBomtomCompassMenuDelegate <NSObject>
 
 @optional
-- (void)LLBomtomCompassMenu:(LLBomtomCompassMenu *)menu buttonClickedWithTag:(LLBomtomCompassMenuButtonTag)tag;
+- (void)LLBomtomCompassMenu:(LLBomtomCompassMenu *)menu outterMenuButtonDidClicked:(LLBomtomCompassMenuButtonTag)innerBtnTag withInnerMenuButton:(LLBomtomCompassMenuButtonTag)innerBtnTag;
+- (void)LLBomtomCompassMenu:(LLBomtomCompassMenu *)menu innerMenuButtonDidClicked:(LLBomtomCompassMenuButtonTag)tag;
+
 - (void)LLBomtomCompassMenuWillHide:(LLBomtomCompassMenu *)menu;
 - (void)LLBomtomCompassMenuWillShow:(LLBomtomCompassMenu *)menu;
 - (void)LLBomtomCompassMenuDidHide:(LLBomtomCompassMenu *)menu;
@@ -50,15 +52,17 @@ typedef enum {
     BOOL _isRotationViewShow;//NO 为不显示状态 
     BOOL _isMenuShow;
     id<LLBomtomCompassMenuDelegate> delegate;
-    NSMutableDictionary *_outterImgsForInnerMenuItems;
-    NSMutableDictionary *_outterHighlightedImgsForInnerMenuItems;
-    LLBomtomCompassMenuButtonTag _currentSelectedMenuTag;
+    NSMutableDictionary *_outterImgsForInnerMenuButtons;
+    NSMutableDictionary *_outterHighlightedImgsForInnerMenuButtons;
+    LLBomtomCompassMenuButtonTag _currentSelectedMenuButtonTag;
+    LLBomtomCompassMenuButtonTag _currentSelectedInnerMenuButtonTag;
 }
 
 @property (nonatomic, retain)  id<LLBomtomCompassMenuDelegate> delegate;
 
 - (BOOL)isMenuShow;
 - (void)showOrHideMenu;
+
 - (void)addButtonToCenterWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage;
 
 - (void)addButtonsToFirstRoundWithImages:(NSArray *)images 
@@ -66,9 +70,9 @@ typedef enum {
 - (void)addButtonsToFirstRoundWithImages:(NSArray *)images;
 - (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
                         highlightedImages:(NSArray *)highlightedImages 
-             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag;
+             bindingToInnerMenuItemByTag:(LLBomtomCompassMenuButtonTag)tag;
 - (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
-             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag;
+             bindingToInnerMenuItemByTag:(LLBomtomCompassMenuButtonTag)tag;
 
 @end
 

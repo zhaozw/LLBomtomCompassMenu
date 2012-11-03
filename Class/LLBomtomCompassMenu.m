@@ -11,6 +11,7 @@
 #define DEGREES_TO_RADIANS(d) (d * M_PI / 180)
 #define VIEW_HEIGHT LLBOMTOMCOMPASSMENU_VIEW_HEIGHT
 #define VIEW_WEIGHT LLBOMTOMCOMPASSMENU_VIEW_WIDTH
+#define ROTATION_ANNIMATION_DURATION 0.4
 
 
 @implementation LLBomtomCompassMenu
@@ -29,9 +30,10 @@
     {
         _isRotationViewShow = YES;
         _isMenuShow = YES;
-        _outterImgsForInnerMenuItems = [[NSMutableDictionary alloc] init];
-        _outterHighlightedImgsForInnerMenuItems = [[NSMutableDictionary alloc] init];
-        _currentSelectedMenuTag = kLLBomtomCompassMenuNULL;
+        _outterImgsForInnerMenuButtons = [[NSMutableDictionary alloc] init];
+        _outterHighlightedImgsForInnerMenuButtons = [[NSMutableDictionary alloc] init];
+        _currentSelectedMenuButtonTag = kLLBomtomCompassMenuNULL;
+        _currentSelectedInnerMenuButtonTag = kLLBomtomCompassMenuNULL;
         [self initView];
     }
     return self;
@@ -41,8 +43,8 @@
 {
     [_innerView release];
     [_rotationView release];
-    [_outterImgsForInnerMenuItems release];
-    [_outterHighlightedImgsForInnerMenuItems release];
+    [_outterImgsForInnerMenuButtons release];
+    [_outterHighlightedImgsForInnerMenuButtons release];
     [super dealloc];
 }
 
@@ -96,8 +98,9 @@
         
         if ([[images objectAtIndex:i] isKindOfClass:[UIImage class]]) {
             
-            if (_currentSelectedMenuTag == kLLBomtomCompassMenuNULL) {
-                _currentSelectedMenuTag = kLLBomtomCompassMenuInnerBtnTag_1;
+            if (_currentSelectedMenuButtonTag == kLLBomtomCompassMenuNULL) {
+                _currentSelectedMenuButtonTag = kLLBomtomCompassMenuInnerBtnTag_1;
+                _currentSelectedInnerMenuButtonTag = kLLBomtomCompassMenuInnerBtnTag_1;
             }
             
             [btn setImage:[images objectAtIndex:i] forState:UIControlStateNormal];
@@ -116,30 +119,33 @@
 
 - (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
                         highlightedImages:(NSArray *)highlightedImages 
-             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag
+             bindingToInnerMenuItemByTag:(LLBomtomCompassMenuButtonTag)tag
 {
 
-    if (tag < kLLBomtomCompassMenuInnerBtnTag_1 || tag > kLLBomtomCompassMenuInnerBtnTag_5) {
+    if (tag == kLLBomtomCompassMenuCenterBtnTag ||
+        (tag >= kLLBomtomCompassMenuInnerBtnTag_1 && tag <= kLLBomtomCompassMenuInnerBtnTag_5)) {
+        /*continue*/
+    } else {
         return;
-    }
+    }        
     
     NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:tag]];
     
-    if (images) {
-        [_outterImgsForInnerMenuItems setObject:images forKey:key];
+    if (images != nil) {
+        [_outterImgsForInnerMenuButtons setObject:images forKey:key];
     }
     
     if (highlightedImages) {
-        [_outterHighlightedImgsForInnerMenuItems setObject:highlightedImages forKey:key];
+        [_outterHighlightedImgsForInnerMenuButtons setObject:highlightedImages forKey:key];
     }
     
     [self setButtonsOnOutterRound];
 }
 
 - (void)addButtonsToSecondRoundWithImages:(NSArray *)images 
-             bindingToFirstRoundItemByTag:(LLBomtomCompassMenuButtonTag)tag
+             bindingToInnerMenuItemByTag:(LLBomtomCompassMenuButtonTag)tag
 {
-    [self addButtonsToSecondRoundWithImages:images highlightedImages:nil bindingToFirstRoundItemByTag:tag];
+    [self addButtonsToSecondRoundWithImages:images highlightedImages:nil bindingToInnerMenuItemByTag:tag];
 }
 
 - (void)addButtonToCenterWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage
@@ -164,7 +170,7 @@
 - (void)setButtonsOnOutterRound
 {
     
-    if (_currentSelectedMenuTag == kLLBomtomCompassMenuNULL) 
+    if (_currentSelectedMenuButtonTag == kLLBomtomCompassMenuNULL) 
         return;
     
     CGRect rects[7];
@@ -184,9 +190,9 @@
         }
     }
     
-    NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:_currentSelectedMenuTag]];
-    NSArray *images = [_outterImgsForInnerMenuItems objectForKey:key];
-    NSArray *highlightedImages = [_outterHighlightedImgsForInnerMenuItems objectForKey:key];
+    NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:_currentSelectedMenuButtonTag]];
+    NSArray *images = [_outterImgsForInnerMenuButtons objectForKey:key];
+    NSArray *highlightedImages = [_outterHighlightedImgsForInnerMenuButtons objectForKey:key];
     
     for (NSInteger i = 0; i < [images count] && i < 7; i ++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -213,27 +219,60 @@
     UIButton *button = (UIButton *)sender;
     
     /* update the buttons in outter round */
-    _currentSelectedMenuTag = button.tag;
-    [self setButtonsOnOutterRound];
+    _currentSelectedMenuButtonTag = button.tag;
+    BOOL isInnerMenuButtonClicked = NO;
     
-    /* when the center button clicked */
-    if (button.tag != kLLBomtomCompassMenuCenterBtnTag) {
+    /* when the inner menu button clicked */
+    if ((button.tag >= kLLBomtomCompassMenuInnerBtnTag_1 &&
+         button.tag <= kLLBomtomCompassMenuInnerBtnTag_5) ||
+        button.tag == kLLBomtomCompassMenuCenterBtnTag) {
+        
+        _currentSelectedInnerMenuButtonTag = button.tag;
+        isInnerMenuButtonClicked = YES;
         button.userInteractionEnabled = NO;
+        
+        if (_isRotationViewShow) {
+            CGFloat angle = _isRotationViewShow ? 180.0 : 0.0;
+            _rotationView.layer.transform = CATransform3DMakeRotation(DEGREES_TO_RADIANS(angle), 
+                                                                        0.0, 0.0, 1.0);
+            _isRotationViewShow = NO;
+        }
+        
         [self rotationAnimation];
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dd)]) {
-        [self.delegate LLBomtomCompassMenu:self buttonClickedWithTag:button.tag];
+    if (isInnerMenuButtonClicked) {
+        if ( self.delegate && 
+            [self.delegate respondsToSelector:@selector(LLBomtomCompassMenu:innerMenuButtonDidClicked:)]) {
+            
+            [self.delegate LLBomtomCompassMenu:self 
+                     innerMenuButtonDidClicked:_currentSelectedInnerMenuButtonTag];
+        }
+    } else {
+        if (self.delegate &&
+            [self.delegate respondsToSelector:@selector(LLBomtomCompassMenu:outterMenuButtonDidClicked:withInnerMenuButton:)]) {
+            
+            [self.delegate LLBomtomCompassMenu:self 
+                    outterMenuButtonDidClicked:_currentSelectedInnerMenuButtonTag 
+                           withInnerMenuButton:_currentSelectedMenuButtonTag];
+        }
     }
     
-    NSLog(@"menu tag %d clicked", button.tag);
+    
+    
+    NSLog(@"menu tag %d:%d clicked", _currentSelectedInnerMenuButtonTag, _currentSelectedMenuButtonTag);
 }
 
 /* start the outter round rotation */
 - (void)rotationAnimation
 {
+    /* The view will show, update the outter round view */
+    if (_isRotationViewShow == NO) {
+        [self setButtonsOnOutterRound];
+    }
+    
     [UIView beginAnimations:@"present-countdown" context:nil];
-    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDuration:ROTATION_ANNIMATION_DURATION];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDidStopSelector:@selector(rotationAnimationDidStop)];
@@ -266,7 +305,7 @@
 /* When the rotation end, notify the delegate using this method */
 - (void)rotationAnimationDidStop
 {
-    UIButton *menuButton =  (UIButton *)[self viewWithTag:kLLBomtomCompassMenuCenterBtnTag];
+    UIButton *menuButton =  (UIButton *)[_innerView viewWithTag:_currentSelectedInnerMenuButtonTag];
     menuButton.userInteractionEnabled = YES;
     
     if (_isRotationViewShow && 
