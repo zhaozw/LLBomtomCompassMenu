@@ -18,13 +18,6 @@
 		5332214B1533E16B005937E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533221481533E16B005937E9 /* SystemConfiguration.framework */; };
 		53D1F00E150E1DAC0030D83A /* HHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D1F00C150E1DAC0030D83A /* HHViewController.m */; };
 		53D1F00F150E1DAC0030D83A /* HHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F00D150E1DAC0030D83A /* HHViewController.xib */; };
-		53D1F051150E1F680030D83A /* menu1.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F021150E1F680030D83A /* menu1.png */; };
-		53D1F052150E1F680030D83A /* menu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F022150E1F680030D83A /* menu1@2x.png */; };
-		53D1F053150E1F680030D83A /* menu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F023150E1F680030D83A /* menu2.png */; };
-		53D1F054150E1F680030D83A /* menu2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F024150E1F680030D83A /* menu2@2x.png */; };
-		53D1F055150E1F680030D83A /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F025150E1F680030D83A /* menu@2x.png */; };
-		53D1F079150E212E0030D83A /* HHYoukuMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53D1F078150E212E0030D83A /* HHYoukuMenuView.m */; };
-		53D1F07B150E219E0030D83A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D1F07A150E219E0030D83A /* View.xib */; };
 		53D1F08C150E39D80030D83A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D1F08B150E39D80030D83A /* QuartzCore.framework */; };
 		C12BB7911643C4AA00B60D0A /* menu_large.png in Resources */ = {isa = PBXBuildFile; fileRef = C12BB78F1643C4AA00B60D0A /* menu_large.png */; };
 		C12BB7921643C4AA00B60D0A /* menu_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C12BB7901643C4AA00B60D0A /* menu_large@2x.png */; };
@@ -91,14 +84,6 @@
 		53D1F00B150E1DAC0030D83A /* HHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHViewController.h; sourceTree = "<group>"; };
 		53D1F00C150E1DAC0030D83A /* HHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHViewController.m; sourceTree = "<group>"; };
 		53D1F00D150E1DAC0030D83A /* HHViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HHViewController.xib; sourceTree = "<group>"; };
-		53D1F021150E1F680030D83A /* menu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu1.png; sourceTree = "<group>"; };
-		53D1F022150E1F680030D83A /* menu1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu1@2x.png"; sourceTree = "<group>"; };
-		53D1F023150E1F680030D83A /* menu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu2.png; sourceTree = "<group>"; };
-		53D1F024150E1F680030D83A /* menu2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu2@2x.png"; sourceTree = "<group>"; };
-		53D1F025150E1F680030D83A /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
-		53D1F077150E212E0030D83A /* HHYoukuMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHYoukuMenuView.h; sourceTree = "<group>"; };
-		53D1F078150E212E0030D83A /* HHYoukuMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHYoukuMenuView.m; sourceTree = "<group>"; };
-		53D1F07A150E219E0030D83A /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		53D1F08B150E39D80030D83A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C12BB78F1643C4AA00B60D0A /* menu_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_large.png; sourceTree = "<group>"; };
 		C12BB7901643C4AA00B60D0A /* menu_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_large@2x.png"; sourceTree = "<group>"; };
@@ -172,7 +157,6 @@
 			children = (
 				C12BB7931643C4EB00B60D0A /* Class */,
 				C12BB78E1643C4AA00B60D0A /* Images */,
-				53D1F015150E1F680030D83A /* image */,
 				53106C99150C50B000F45EEF /* youku */,
 				53106C92150C50B000F45EEF /* Frameworks */,
 				53106C90150C50B000F45EEF /* Products */,
@@ -209,9 +193,6 @@
 				53D1F00B150E1DAC0030D83A /* HHViewController.h */,
 				53D1F00C150E1DAC0030D83A /* HHViewController.m */,
 				53D1F00D150E1DAC0030D83A /* HHViewController.xib */,
-				53D1F077150E212E0030D83A /* HHYoukuMenuView.h */,
-				53D1F078150E212E0030D83A /* HHYoukuMenuView.m */,
-				53D1F07A150E219E0030D83A /* View.xib */,
 				53106C9A150C50B000F45EEF /* Supporting Files */,
 			);
 			path = youku;
@@ -226,18 +207,6 @@
 				53106CA1150C50B000F45EEF /* youku-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		53D1F015150E1F680030D83A /* image */ = {
-			isa = PBXGroup;
-			children = (
-				53D1F021150E1F680030D83A /* menu1.png */,
-				53D1F022150E1F680030D83A /* menu1@2x.png */,
-				53D1F023150E1F680030D83A /* menu2.png */,
-				53D1F024150E1F680030D83A /* menu2@2x.png */,
-				53D1F025150E1F680030D83A /* menu@2x.png */,
-			);
-			path = image;
 			sourceTree = "<group>";
 		};
 		C12BB78E1643C4AA00B60D0A /* Images */ = {
@@ -355,12 +324,6 @@
 			files = (
 				53106C9E150C50B000F45EEF /* InfoPlist.strings in Resources */,
 				53D1F00F150E1DAC0030D83A /* HHViewController.xib in Resources */,
-				53D1F051150E1F680030D83A /* menu1.png in Resources */,
-				53D1F052150E1F680030D83A /* menu1@2x.png in Resources */,
-				53D1F053150E1F680030D83A /* menu2.png in Resources */,
-				53D1F054150E1F680030D83A /* menu2@2x.png in Resources */,
-				53D1F055150E1F680030D83A /* menu@2x.png in Resources */,
-				53D1F07B150E219E0030D83A /* View.xib in Resources */,
 				C12BB7911643C4AA00B60D0A /* menu_large.png in Resources */,
 				C12BB7921643C4AA00B60D0A /* menu_large@2x.png in Resources */,
 				C12BB7981643C9F500B60D0A /* TheViewButNotUsed.xib in Resources */,
@@ -419,7 +382,6 @@
 				53106CA0150C50B000F45EEF /* main.m in Sources */,
 				53106CA4150C50B000F45EEF /* HHAppDelegate.m in Sources */,
 				53D1F00E150E1DAC0030D83A /* HHViewController.m in Sources */,
-				53D1F079150E212E0030D83A /* HHYoukuMenuView.m in Sources */,
 				C12BB7961643C51500B60D0A /* LLBomtomCompassMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
