@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 //#import "HHFullScreenViewController.h"
-#import "HHYoukuMenuView.h"
+#import "LLBomtomCompassMenu.h"
 @interface HHViewController : UIViewController
 {
-    HHYoukuMenuView *youkuMenuView;
+    LLBomtomCompassMenu *menu;
 }
-@property (nonatomic, retain) HHYoukuMenuView *youkuMenuView;
+@property (nonatomic, retain) LLBomtomCompassMenu *menu;
 @end

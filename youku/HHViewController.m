@@ -10,11 +10,11 @@
 #import "LLBomtomCompassMenu.h"
 //#import "HHFullScreenViewController.h"
 @implementation HHViewController
-@synthesize youkuMenuView;
+@synthesize menu;
 
 - (void)dealloc
 {
-    [youkuMenuView release];
+    [menu release];
     [super dealloc]; 
 }
 
@@ -43,17 +43,18 @@
     
     //youkuMenuView = [[HHYoukuMenuView alloc]initWithFrame:[HHYoukuMenuView getFrame]];
     
-    LLBomtomCompassMenu *menu = [[LLBomtomCompassMenu alloc] initWithFrame:CGRectMake(12, 460-LLBOMTOMCOMPASSMENU_VIEW_HEIGHT, 
-                                                                                      LLBOMTOMCOMPASSMENU_VIEW_WIDTH, 
-                                                                                      LLBOMTOMCOMPASSMENU_VIEW_HEIGHT)];
-    [menu addButtonsToFirstRoundWithImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"mcartoon"], [UIImage imageNamed:@"mcartoonh"], [UIImage imageNamed:@"menter"], [UIImage imageNamed:@"mhome"], [UIImage imageNamed:@"mmovie"], nil]];
+    self.menu = [[LLBomtomCompassMenu alloc] initAboveOfView:[[UIView alloc] initWithFrame:CGRectMake(0, 460, 320, 1)]];
+    [menu addButtonsToFirstRoundWithImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"mcartoon"], [NSNull null], [UIImage imageNamed:@"menter"], [NSNull null], [UIImage imageNamed:@"mmovie"], nil]];
     
     [menu addButtonsToSecondRoundWithImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"mmusic"], 
                                              [UIImage imageNamed:@"mmyi"], [UIImage imageNamed:@"mmyi"],
                                              [UIImage imageNamed:@"mmyi"], [UIImage imageNamed:@"mmyi"],
-                                             [UIImage imageNamed:@"mmyi"], [UIImage imageNamed:@"mmyi"], nil] bindingToFirstRoundItemByTag:kLLBomtomCompassMenuInnerBtnTag_1];
+                                             [UIImage imageNamed:@"mmyi"], [UIImage imageNamed:@"mmyi"], nil] bindingToInnerMenuItemByTag:kLLBomtomCompassMenuInnerBtnTag_1];
     
-    
+    [menu addButtonsToSecondRoundWithImages:[NSArray arrayWithObjects:[UIImage imageNamed:@"mcartoon"], 
+                                             [UIImage imageNamed:@"mcartoon"], [UIImage imageNamed:@"mmyi"],
+                                             [UIImage imageNamed:@"mcartoon"], [NSNull null],
+                                             [UIImage imageNamed:@"mcartoon"], [UIImage imageNamed:@"mcartoon"], nil] bindingToInnerMenuItemByTag:kLLBomtomCompassMenuInnerBtnTag_3];
     
     [menu addButtonToCenterWithImage:[UIImage imageNamed:@"mvideo"] highlightedImage:nil];
     [self.view addSubview:menu];
@@ -69,12 +70,12 @@
     UIButton *button = (UIButton *)sender;
     button.hidden = YES;
     
-    [youkuMenuView showOrHideMenu];
+    [self.menu showOrHideMenu];
 }
 
 - (void)hideMenu
 {
-    [youkuMenuView showOrHideMenu];
+    [self.menu showOrHideMenu];
     [self performSelector:@selector(showMeunButton) withObject:self afterDelay:1.0];
 }
 
