@@ -12,14 +12,25 @@
 #define VIEW_HEIGHT LLBOMTOMCOMPASSMENU_VIEW_HEIGHT
 #define VIEW_WEIGHT LLBOMTOMCOMPASSMENU_VIEW_WIDTH
 #define ROTATION_ANNIMATION_DURATION 0.4
-
+#define SHOWANDHIDE_ANIMATION_DURATION 0.4
 
 @implementation LLBomtomCompassMenu
 @synthesize delegate;
 
-- (id)init
+- (id)initAboveOfView:(UIView *)view
 {
-    self = [self initWithFrame: CGRectMake(0, 0, VIEW_WEIGHT, VIEW_HEIGHT)];
+    CGRect frame = view.frame;
+    CGPoint position = frame.origin;
+    CGSize size = frame.size;
+    
+    _origin.x = position.x + (size.width - VIEW_WEIGHT)/2.0;
+    _origin.y = position.y - VIEW_HEIGHT + 14;
+    
+    self = [self initWithFrame: CGRectMake(_origin.x, _origin.y, VIEW_WEIGHT, VIEW_HEIGHT)];
+
+    NSLog(@"self : %@", self);
+    
+    [view.superview insertSubview:self atIndex:0];
     return self;
 }
 
@@ -34,6 +45,7 @@
         _outterHighlightedImgsForInnerMenuButtons = [[NSMutableDictionary alloc] init];
         _currentSelectedMenuButtonTag = kLLBomtomCompassMenuNULL;
         _currentSelectedInnerMenuButtonTag = kLLBomtomCompassMenuNULL;
+        _isInAnimation = NO;
         [self initView];
     }
     return self;
@@ -71,12 +83,12 @@
 
 - (CGRect)getShowFrame
 {
-    return CGRectMake( (320.0 - VIEW_WEIGHT)/2.0, 460.0 - VIEW_HEIGHT, VIEW_WEIGHT, VIEW_HEIGHT);
+    return CGRectMake(_origin.x, _origin.y, VIEW_WEIGHT, VIEW_HEIGHT);
 }
 
 - (CGRect)getHideFrame
 {
-    return CGRectMake( (320.0 - VIEW_WEIGHT)/2.0, 460.0, VIEW_WEIGHT, VIEW_HEIGHT);
+    return CGRectMake(_origin.x, _origin.y + VIEW_HEIGHT, VIEW_WEIGHT, VIEW_HEIGHT);
 }
 
 - (void)addButtonsToFirstRoundWithImages:(NSArray *)images 
@@ -216,6 +228,10 @@
 
 - (void)menuButtonClicked:(id)sender
 {
+    if (_isInAnimation ) {
+        return;
+    }
+    
     UIButton *button = (UIButton *)sender;
     
     /* update the buttons in outter round */
@@ -282,6 +298,8 @@
                                                               0.0, 0.0, 1.0);
     
     [self rotationAnimationWillStart];
+    
+    _isInAnimation = YES;
     [UIView commitAnimations];
 }
 
@@ -307,6 +325,8 @@
 {
     UIButton *menuButton =  (UIButton *)[_innerView viewWithTag:_currentSelectedInnerMenuButtonTag];
     menuButton.userInteractionEnabled = YES;
+    _isRotationViewShow = !_isRotationViewShow;
+    _isInAnimation = NO;
     
     if (_isRotationViewShow && 
         self.delegate && 
@@ -320,16 +340,13 @@
     {        
         [self.delegate LLBomtomCompassMenuDidShowRotationAnimation:self];
     }
-    
-    
-    _isRotationViewShow = !_isRotationViewShow;
 }
 
 /* show or hide the menu in up and down direction */
 - (void)showOrHideMenu
 {
     [UIView beginAnimations:@"present-countdown" context:nil];
-    [UIView setAnimationDuration:1];
+    [UIView setAnimationDuration:SHOWANDHIDE_ANIMATION_DURATION];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(showOrHideMenuAnimationDidStop)];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];

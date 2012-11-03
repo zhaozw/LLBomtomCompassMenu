@@ -56,9 +56,13 @@ typedef enum {
     NSMutableDictionary *_outterHighlightedImgsForInnerMenuButtons;
     LLBomtomCompassMenuButtonTag _currentSelectedMenuButtonTag;
     LLBomtomCompassMenuButtonTag _currentSelectedInnerMenuButtonTag;
+    CGPoint _origin;
+    BOOL _isInAnimation;
 }
 
 @property (nonatomic, retain)  id<LLBomtomCompassMenuDelegate> delegate;
+
+- (id)initAboveOfView:(UIView *)view;
 
 - (BOOL)isMenuShow;
 - (void)showOrHideMenu;
